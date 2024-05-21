@@ -161,3 +161,6 @@ cython_debug/
 
 # Data files and folders
 data/
+mlruns/
+artifacts/
+*.db

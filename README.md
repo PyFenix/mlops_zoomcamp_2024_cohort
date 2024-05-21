@@ -1,7 +1,6 @@
 
 # [MLOps Zoomcamp](https://github.com/DataTalksClub/mlops-zoomcamp/) 2024 by [DataTalks.Club](https://datatalks.club/)
 
-
 Welcome to the MLOps Zoomcamp 2024 cohort! This repository contains all the materials, projects, and resources for the MLOps Zoomcamp hosted by DataTalks.Club.
 
 ## Table of Contents
@@ -10,7 +9,6 @@ Welcome to the MLOps Zoomcamp 2024 cohort! This repository contains all the mate
 - [Schedule](#schedule)
 - [Projects](#projects)
 - [Installation](#installation)
-
 
 ## Course Overview
 
@@ -36,11 +34,9 @@ The MLOps Zoomcamp is designed to help you learn the fundamentals and advanced c
 | 6    | Best Practices                            |              |
 | 7    | Project                                   |              |
 
-
 ## Projects
 
 Throughout the course, you will work on several hands-on projects, including:
-
 
 - **Project 1: TBD**
   - TBD.
