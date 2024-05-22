@@ -1,11 +1,12 @@
 import os
+import numpy as np
 import pickle
 import click
 import mlflow
 import mlflow.sklearn
 
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import root_mean_squared_error
+from sklearn.metrics import mean_squared_error
 
 
 def load_pickle(filename: str):
@@ -19,9 +20,20 @@ def load_pickle(filename: str):
     default="./output",
     help="Location where the processed NYC taxi trip data was saved",
 )
-def run_train(data_path: str):
-    # Set the tracking URI to a directory within the project
-    mlflow.set_tracking_uri("http://localhost:5000")
+@click.option(
+    "--local",
+    is_flag=True,
+    help="Run the script locally without connecting to an MLflow server",
+)
+def run_train(data_path: str, local: bool):
+    if local:
+        # Define the local tracking URI within the project directory
+        tracking_uri = os.path.join(os.path.dirname(__file__), "../mlruns")
+        os.makedirs(tracking_uri, exist_ok=True)
+        mlflow.set_tracking_uri(f"file://{os.path.abspath(tracking_uri)}")
+    else:
+        mlflow.set_tracking_uri("http://localhost:5000")
+
     mlflow.set_experiment("mlops_zoomcamp")
 
     # Enable autologging, but we will manually log some parts
@@ -31,11 +43,17 @@ def run_train(data_path: str):
         X_train, y_train = load_pickle(os.path.join(data_path, "train.pkl"))
         X_val, y_val = load_pickle(os.path.join(data_path, "val.pkl"))
 
+        # Ensure X_train and X_val are converted to appropriate format if needed
+        if isinstance(X_train, np.ndarray):
+            X_train = np.array(X_train)
+        if isinstance(X_val, np.ndarray):
+            X_val = np.array(X_val)
+
         rf = RandomForestRegressor(max_depth=10, random_state=0)
         rf.fit(X_train, y_train)
         y_pred = rf.predict(X_val)
 
-        rmse = root_mean_squared_error(y_val, y_pred)
+        rmse = mean_squared_error(y_val, y_pred, squared=False)
         print(f"RMSE: {rmse}")
         min_samples_split = rf.get_params().get("min_samples_split")
         print(f"min_samples_split: {min_samples_split}")
