@@ -170,3 +170,5 @@ mlops/
 terraform/
 3.orchestration/scripts/
 3.orchestration/mlflow/
+.vscode/
+*.parquet
