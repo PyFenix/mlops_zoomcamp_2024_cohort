@@ -127,6 +127,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.env.dev
 
 # Spyder project settings
 .spyderproject
@@ -164,3 +165,8 @@ data/
 mlruns/
 artifacts/
 *.db
+*.bin
+mlops/
+terraform/
+3.orchestration/scripts/
+3.orchestration/mlflow/
