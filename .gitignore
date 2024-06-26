@@ -172,3 +172,4 @@ terraform/
 3.orchestration/mlflow/
 .vscode/
 *.parquet
+.venv*
