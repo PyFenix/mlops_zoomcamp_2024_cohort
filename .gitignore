@@ -173,3 +173,5 @@ terraform/
 .vscode/
 *.parquet
 .venv*
+data/
+models/
